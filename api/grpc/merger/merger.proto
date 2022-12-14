@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package merger;
+
+option go_package = "github.com/FatimaAlKaus/go-parser/api/grpc/merger";
+
+service Merger{
+ rpc Merge (MergeRequest) returns (MerrgeResponse);
+}
+
+message MergeRequest{
+ repeated bytes docs = 1;
+}
+
+message MerrgeResponse{
+ bytes doc = 1;
+}
