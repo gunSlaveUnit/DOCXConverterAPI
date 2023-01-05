@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import FastAPI, UploadFile
 
-from utilities.merger import combine_documents, clear_files_directory
+from utils.merger import combine_documents, clear_files_directory
 
 app = FastAPI()
 

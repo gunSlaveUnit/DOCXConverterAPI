@@ -5,7 +5,7 @@ import grpc
 
 import merger_pb2
 import merger_pb2_grpc
-from utilities.merger import clear_files_directory, combine_documents
+from utils.merger import clear_files_directory, combine_documents
 
 
 class GRPCDOCXMerger(merger_pb2_grpc.MergerServicer):
