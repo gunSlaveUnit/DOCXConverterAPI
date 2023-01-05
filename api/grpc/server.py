@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from concurrent import futures
 
@@ -5,12 +6,12 @@ import grpc
 
 import merger_pb2
 import merger_pb2_grpc
-from utils.merger import clear_files_directory, combine_documents
+from merger import clear_files_directory, combine_documents
 
 
 class GRPCDOCXMerger(merger_pb2_grpc.MergerServicer):
-    async def Merge(self, request, context):
-        response = await combine_documents(request.docs)
+    def Merge(self, request, context):
+        response = combine_documents(request.docs)
         clear_files_directory()
         return merger_pb2.MergeResponse(doc=response)
 

@@ -1,15 +1,16 @@
-from typing import List
+import os
 
 import grpc
 
 import merger_pb2
 import merger_pb2_grpc
 
+ROOT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 
-def get_file_data(files: List[str]) -> bytes:
-    for filename in files:
-        with open(filename, 'rb') as file:
-            yield file.read()
+
+def get_file_data(filename: str) -> bytes:
+    with open(os.path.join(ROOT_DIRECTORY, filename), 'rb') as file:
+        return file.read()
 
 
 def run():
@@ -17,7 +18,7 @@ def run():
         stub = merger_pb2_grpc.MergerStub(channel)
         response = stub.Merge(
             merger_pb2.MergeRequest(
-                docs=[get_file_data(['boo.docx', 'foo.docx'])]
+                docs=[data := get_file_data(filename) for filename in ['boo.docx', 'foo.docx']]
             )
         )
         print("Client received: ", response.doc)
