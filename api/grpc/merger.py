@@ -22,12 +22,15 @@ def combine_documents(files: List[bytes]):
     if len(files) == 0:
         return bytes()
 
+    if len(files) == 1:
+        return files[0]
+
     store_files(files)
     filenames = [
         os.path.join(FILES_DIRECTORY, ''.join(['filename', str(file_index)])) for file_index in range(len(files))
     ]
 
-    combine(filenames[0], []) if len(files) == 1 else combine(filenames[0], filenames[1:])
+    combine(filenames[0], filenames[1:])
 
     return get_file_data('combined.docx')
 
