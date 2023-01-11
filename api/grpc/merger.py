@@ -12,17 +12,22 @@ from fastapi.responses import FileResponse
 ROOT_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 FILES_DIRECTORY = os.path.join(ROOT_DIRECTORY, 'files')
 
+
 def get_file_data(filename: str) -> bytes:
     with open(os.path.join(ROOT_DIRECTORY, filename), 'rb') as file:
         return file.read()
 
 
 def combine_documents(files: List[bytes]):
+    if len(files) == 0:
+        return bytes()
+
     store_files(files)
     filenames = [
         os.path.join(FILES_DIRECTORY, ''.join(['filename', str(file_index)])) for file_index in range(len(files))
     ]
-    combine(filenames[0], filenames[1:])
+
+    combine(filenames[0], []) if len(files) == 1 else combine(filenames[0], filenames[1:])
 
     return get_file_data('combined.docx')
 
