@@ -15,10 +15,10 @@ class MergerStub(object):
             channel: A grpc.Channel.
         """
         self.Merge = channel.unary_unary(
-                '/merger.Merger/Merge',
-                request_serializer=merger__pb2.MergeRequest.SerializeToString,
-                response_deserializer=merger__pb2.MerrgeResponse.FromString,
-                )
+            '/merger.Merger/Merge',
+            request_serializer=merger__pb2.MergeRequest.SerializeToString,
+            response_deserializer=merger__pb2.MergeResponse.FromString,
+        )
 
 
 class MergerServicer(object):
@@ -33,34 +33,34 @@ class MergerServicer(object):
 
 def add_MergerServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Merge': grpc.unary_unary_rpc_method_handler(
-                    servicer.Merge,
-                    request_deserializer=merger__pb2.MergeRequest.FromString,
-                    response_serializer=merger__pb2.MerrgeResponse.SerializeToString,
-            ),
+        'Merge': grpc.unary_unary_rpc_method_handler(
+            servicer.Merge,
+            request_deserializer=merger__pb2.MergeRequest.FromString,
+            response_serializer=merger__pb2.MergeResponse.SerializeToString,
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'merger.Merger', rpc_method_handlers)
+        'merger.Merger', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
- # This class is part of an EXPERIMENTAL API.
+# This class is part of an EXPERIMENTAL API.
 class Merger(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def Merge(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
+              target,
+              options=(),
+              channel_credentials=None,
+              call_credentials=None,
+              insecure=False,
+              compression=None,
+              wait_for_ready=None,
+              timeout=None,
+              metadata=None):
         return grpc.experimental.unary_unary(request, target, '/merger.Merger/Merge',
-            merger__pb2.MergeRequest.SerializeToString,
-            merger__pb2.MerrgeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+                                             merger__pb2.MergeRequest.SerializeToString,
+                                             merger__pb2.MergeResponse.FromString,
+                                             options, channel_credentials,
+                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

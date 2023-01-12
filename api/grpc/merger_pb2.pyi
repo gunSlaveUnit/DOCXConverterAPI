@@ -11,7 +11,7 @@ class MergeRequest(_message.Message):
     docs: _containers.RepeatedScalarFieldContainer[bytes]
     def __init__(self, docs: _Optional[_Iterable[bytes]] = ...) -> None: ...
 
-class MerrgeResponse(_message.Message):
+class MergeResponse(_message.Message):
     __slots__ = ["doc"]
     DOC_FIELD_NUMBER: _ClassVar[int]
     doc: bytes
