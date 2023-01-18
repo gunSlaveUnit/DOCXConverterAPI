@@ -10,4 +10,4 @@ COPY . .
 RUN python3 -m pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 50051
-CMD ["python", "./api/grpc/server.py"]
+CMD ["python", "./server.py"]
